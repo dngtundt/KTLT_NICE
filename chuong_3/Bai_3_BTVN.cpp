@@ -110,6 +110,26 @@ void SapXepCot(int a[][MAX_SIZE], int rows, int cols) {
 		}
 	}
 }
+
+//Kiểm tra các giá trị trong ma trận có giảm dần theo cột và dòng (ziczac)
+bool KiemTraGiamDan(int a[][MAX_SIZE], int rows, int cols) {
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols - 1; j++) {
+			if (a[i][j] < a[i][j + 1]) {
+				return false;
+			}
+		}
+	}
+	for (int j = 0; j < cols; j++) {
+		for (int i = 0; i < rows - 1; i++) {
+			if (a[i][j] < a[i + 1][j]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 int main() {
 	int a[MAX_SIZE][MAX_SIZE];
 	int rows, cols;
@@ -151,5 +171,7 @@ int main() {
 		}
 		printf("\n");
 	}
+
+	printf("Ma tran giam dan theo cot va dong (ziczac): %s\n", KiemTraGiamDan(a, rows, cols) ? "Dung" : "Sai");
 	return 0;
 }
