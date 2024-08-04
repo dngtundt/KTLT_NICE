@@ -38,6 +38,29 @@ int TimMaxTrenBien(int a[][MAX_SIZE], int rows, int cols) {
 	return max;
 }
 
+int DemSo2(int num) {
+	int count = 0;
+	while (num != 0) {
+		if (num % 10 == 2) {
+			count++;
+		}
+		num /= 10;
+	}
+	return count;
+}
+
+int DemPhanTuCoSo2(int a[][MAX_SIZE], int rows, int cols) {
+	int count = 0;
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			if (DemSo2(a[i][j]) > 0) {
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
 int main() {
 	int a[MAX_SIZE][MAX_SIZE];
 	int rows, cols;
@@ -57,5 +80,7 @@ int main() {
 	XuatCotSoLe(a, rows, cols);
 
 	printf("Phan tu lon nhat tren bien cua ma tran la: %d\n", TimMaxTrenBien(a, rows, cols));
+
+	printf("So phan tu co chu so 2 xuat hien trong chu so cua no: %d\n", DemPhanTuCoSo2(a, rows, cols));
 	return 0;
 }
