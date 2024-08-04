@@ -4,6 +4,7 @@
 
 #define MAX_SIZE 100
 
+//Xuất các cột chỉ chứa số lẻ
 void XuatCotSoLe(int a[][MAX_SIZE], int rows, int cols) {
     printf("Cac cot chi chua so le:\n");
     for (int j = 0; j < cols; j++) {
@@ -24,6 +25,7 @@ void XuatCotSoLe(int a[][MAX_SIZE], int rows, int cols) {
     }
 }
 
+//Tìm phần tử lớn nhất trong các phần tử trên biên của ma trận.
 int TimMaxTrenBien(int a[][MAX_SIZE], int rows, int cols) {
 	int max = INT_MIN;
 	for (int i = 0; i < rows; i++) {
@@ -49,6 +51,7 @@ int DemSo2(int num) {
 	return count;
 }
 
+//Trong ma trận có bao nhiêu phần tử có chữ số 2 xuất hiện trong các chữ số của nó.
 int DemPhanTuCoSo2(int a[][MAX_SIZE], int rows, int cols) {
 	int count = 0;
 	for (int i = 0; i < rows; i++) {
@@ -59,6 +62,24 @@ int DemPhanTuCoSo2(int a[][MAX_SIZE], int rows, int cols) {
 		}
 	}
 	return count;
+}
+
+//Xuất các phần tử cực tiểu của ma trận.
+void XuatPhanTuCucTieu(int a[][MAX_SIZE], int rows, int cols) {
+	printf("Cac phan tu cuc tieu trong ma tran:\n");
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			bool isCucTieu = true;
+			if (i > 0 && a[i][j] >= a[i - 1][j]) isCucTieu = false;
+			if (i < rows - 1 && a[i][j] >= a[i + 1][j]) isCucTieu = false;
+			if (j > 0 && a[i][j] >= a[i][j - 1]) isCucTieu = false;
+			if (j < cols - 1 && a[i][j] >= a[i][j + 1]) isCucTieu = false;
+			if (isCucTieu) {
+				printf("%d ", a[i][j]);
+			}
+		}
+	}
+	printf("\n");
 }
 
 int main() {
@@ -82,5 +103,7 @@ int main() {
 	printf("Phan tu lon nhat tren bien cua ma tran la: %d\n", TimMaxTrenBien(a, rows, cols));
 
 	printf("So phan tu co chu so 2 xuat hien trong chu so cua no: %d\n", DemPhanTuCoSo2(a, rows, cols));
+
+	XuatPhanTuCucTieu(a, rows, cols);
 	return 0;
 }
