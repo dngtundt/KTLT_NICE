@@ -130,6 +130,40 @@ bool KiemTraGiamDan(int a[][MAX_SIZE], int rows, int cols) {
 	return true;
 }
 
+//Liệt kê chỉ số các dòng chứa toàn giá trị chẵn
+void LietKeDongChan(int a[][MAX_SIZE], int rows, int cols) {
+	printf("Chi so cac dong chua toan gia tri chan:\n");
+	for (int i = 0; i < rows; i++) {
+		bool allEven = true;
+		for (int j = 0; j < cols; j++) {
+			if (a[i][j] % 2 != 0) {
+				allEven = false;
+				break;
+			}
+		}
+		if (allEven) {
+			printf("Dong %d\n", i);
+		}
+	}
+}
+
+//Liệt kê các dòng chứa giá trị giảm dần
+void LietKeDongGiamDan(int a[][MAX_SIZE], int rows, int cols) {
+	printf("Chi so cac dong chua gia tri giam dan:\n");
+	for (int i = 0; i < rows; i++) {
+		bool isGiamDan = true;
+		for (int j = 0; j < cols - 1; j++) {
+			if (a[i][j] < a[i][j + 1]) {
+				isGiamDan = false;
+				break;
+			}
+		}
+		if (isGiamDan) {
+			printf("Dong %d\n", i);
+		}
+	}
+}
+
 int main() {
 	int a[MAX_SIZE][MAX_SIZE];
 	int rows, cols;
@@ -173,5 +207,9 @@ int main() {
 	}
 
 	printf("Ma tran giam dan theo cot va dong (ziczac): %s\n", KiemTraGiamDan(a, rows, cols) ? "Dung" : "Sai");
+
+	LietKeDongChan(a, rows, cols);
+
+	LietKeDongGiamDan(a, rows, cols);
 	return 0;
 }
