@@ -82,6 +82,34 @@ void XuatPhanTuCucTieu(int a[][MAX_SIZE], int rows, int cols) {
 	printf("\n");
 }
 
+//Sắp xếp ma trận sao cho : các dòng có chỉ số lẻ thì tăng dần, còn các dòng có chỉ số chẵn thì giảm dần.
+void SapXepDong(int a[][MAX_SIZE], int rows, int cols) {
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols - 1; j++) {
+			for (int k = j + 1; k < cols; k++) {
+				if ((i % 2 == 0 && a[i][j] < a[i][k]) || (i % 2 != 0 && a[i][j] > a[i][k])) {
+					int temp = a[i][j];
+					a[i][j] = a[i][k];
+					a[i][k] = temp;
+				}
+			}
+		}
+	}
+}
+//Sắp xếp ma trận sao cho : các cột có chỉ số lẻ thì giảm dần, còn các cột có chỉ số chẵn thì tăng dần.
+void SapXepCot(int a[][MAX_SIZE], int rows, int cols) {
+	for (int j = 0; j < cols; j++) {
+		for (int i = 0; i < rows - 1; i++) {
+			for (int k = i + 1; k < rows; k++) {
+				if ((j % 2 == 0 && a[i][j] > a[k][j]) || (j % 2 != 0 && a[i][j] < a[k][j])) {
+					int temp = a[i][j];
+					a[i][j] = a[k][j];
+					a[k][j] = temp;
+				}
+			}
+		}
+	}
+}
 int main() {
 	int a[MAX_SIZE][MAX_SIZE];
 	int rows, cols;
@@ -105,5 +133,23 @@ int main() {
 	printf("So phan tu co chu so 2 xuat hien trong chu so cua no: %d\n", DemPhanTuCoSo2(a, rows, cols));
 
 	XuatPhanTuCucTieu(a, rows, cols);
+
+	SapXepDong(a, rows, cols);
+	printf("Ma tran sau khi sap xep cac dong (le tang dan, chan giam dan):\n");
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			printf("%d ", a[i][j]);
+		}
+		printf("\n");
+	}
+
+	SapXepCot(a, rows, cols);
+	printf("Ma tran sau khi sap xep cac cot (le giam dan, chan tang dan):\n");
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			printf("%d ", a[i][j]);
+		}
+		printf("\n");
+	}
 	return 0;
 }
