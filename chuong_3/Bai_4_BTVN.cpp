@@ -94,6 +94,50 @@ void SapXepDuongCheoChinhVaSongSong(int a[MAX_SIZE][MAX_SIZE], int n) {
 		}
 	}
 }
+
+//Di chuyển các phần tử trong ma trận sao cho các phần tử chẵn nằm ở các dòng đầu mảng, các phần tử lẻ nằm ở các dòng cuối mảng.
+void DiChuyenChanLe(int a[MAX_SIZE][MAX_SIZE], int n) {
+	int temp[MAX_SIZE * MAX_SIZE];
+	int k = 0;
+
+	// Lưu các phần tử chẵn vào mảng tạm thời
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (a[i][j] % 2 == 0) {
+				temp[k++] = a[i][j];
+			}
+		}
+	}
+
+	// Lưu các phần tử lẻ vào mảng tạm thời
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (a[i][j] % 2 != 0) {
+				temp[k++] = a[i][j];
+			}
+		}
+	}
+
+	// Gán lại giá trị cho ma trận
+	k = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			a[i][j] = temp[k++];
+		}
+	}
+}
+
+//Kiểm tra các phần tử trong ma trận có đối xứng nhau qua đường chéo chính không?
+int KiemTraDoiXungQuaDuongCheoChinh(int a[MAX_SIZE][MAX_SIZE], int n) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (a[i][j] != a[j][i]) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
 //In ma trận
 void InMaTran(int a[MAX_SIZE][MAX_SIZE], int n) {
 	for (int i = 0; i < n; i++) {
@@ -159,8 +203,17 @@ int main() {
 			InMaTran(a, n);
 			break;
 		case 6:
+			DiChuyenChanLe(a, n);
+			printf("Ma tran sau khi di chuyen cac phan tu chan len dau va le xuong cuoi:\n");
+			InMaTran(a, n);
 			break;
 		case 7:
+			if (KiemTraDoiXungQuaDuongCheoChinh(a, n)) {
+				printf("Ma tran doi xung qua duong cheo chinh.\n");
+			}
+			else {
+				printf("Ma tran khong doi xung qua duong cheo chinh.\n");
+			}
 			break;
 		case 8:
 			printf("Thoat chuong trinh.\n");
