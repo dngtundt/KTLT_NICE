@@ -237,6 +237,23 @@ void LietKeCotCoTongNhoNhat(int a[][MAX_SIZE], int rows, int cols) {
 	printf("\n");
 }
 
+//Hoán vị hai cột i và j trong ma trận
+void HoanViCot(int a[][MAX_SIZE], int rows, int i, int j) {
+	for (int k = 0; k < rows; k++) {
+		int temp = a[k][i];
+		a[k][i] = a[k][j];
+		a[k][j] = temp;
+	}
+}
+//Hoán vị hai dòng k và l trong ma trận.
+void HoanViDong(int a[][MAX_SIZE], int cols, int k, int l) {
+	for (int i = 0; i < cols; i++) {
+		int temp = a[k][i];
+		a[k][i] = a[l][i];
+		a[l][i] = temp;
+	}
+}
+
 int main() {
 	int a[MAX_SIZE][MAX_SIZE];
 	int rows, cols;
@@ -290,5 +307,30 @@ int main() {
 	printf("Chu so xuat hien nhieu nhat trong ma tran la: %d\n", TimChuSoXuatHienNhieuNhat(a, rows, cols));
 
 	LietKeCotCoTongNhoNhat(a, rows, cols);
+
+	int i, j;
+	printf("Nhap chi so hai cot can hoan vi: ");
+	scanf("%d %d", &i, &j);
+	HoanViCot(a, rows, i, j);
+	printf("Ma tran sau khi hoan vi cot %d va cot %d:\n", i, j);
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			printf("%d ", a[i][j]);
+		}
+		printf("\n");
+	}
+
+	int k, l;
+	printf("Nhap chi so hai dong can hoan vi: ");
+	scanf("%d %d", &k, &l);
+	HoanViDong(a, cols, k, l);
+	printf("Ma tran sau khi hoan vi dong %d va dong %d:\n", k, l);
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			printf("%d ", a[i][j]);
+		}
+		printf("\n");
+	}
+
 	return 0;
 }
