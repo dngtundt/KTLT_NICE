@@ -210,6 +210,33 @@ int TimChuSoXuatHienNhieuNhat(int a[][MAX_SIZE], int rows, int cols) {
 	return chuSo;
 }
 
+//Liệt kê các cột có tổng nhỏ nhất trong ma trận
+void LietKeCotCoTongNhoNhat(int a[][MAX_SIZE], int rows, int cols) {
+	int minSum = INT_MAX;
+	int minCol = -1;
+	for (int j = 0; j < cols; j++) {
+		int sum = 0;
+		for (int i = 0; i < rows; i++) {
+			sum += a[i][j];
+		}
+		if (sum < minSum) {
+			minSum = sum;
+			minCol = j;
+		}
+	}
+	printf("Cac cot co tong nho nhat la: ");
+	for (int j = 0; j < cols; j++) {
+		int sum = 0;
+		for (int i = 0; i < rows; i++) {
+			sum += a[i][j];
+		}
+		if (sum == minSum) {
+			printf("%d ", j);
+		}
+	}
+	printf("\n");
+}
+
 int main() {
 	int a[MAX_SIZE][MAX_SIZE];
 	int rows, cols;
@@ -261,5 +288,7 @@ int main() {
 	printf("Gia tri xuat hien nhieu nhat trong ma tran la: %d\n", TimGiaTriXuatHienNhieuNhat(a, rows, cols));
 
 	printf("Chu so xuat hien nhieu nhat trong ma tran la: %d\n", TimChuSoXuatHienNhieuNhat(a, rows, cols));
+
+	LietKeCotCoTongNhoNhat(a, rows, cols);
 	return 0;
 }
