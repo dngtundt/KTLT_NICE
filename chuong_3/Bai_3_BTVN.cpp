@@ -164,6 +164,52 @@ void LietKeDongGiamDan(int a[][MAX_SIZE], int rows, int cols) {
 	}
 }
 
+//Tìm giá trị xuất hiện nhiều nhất trong ma trận
+int TimGiaTriXuatHienNhieuNhat(int a[][MAX_SIZE], int rows, int cols) {
+	int maxCount = 0;
+	int giaTri = a[0][0];
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			int count = 0;
+			for (int k = 0; k < rows; k++) {
+				for (int l = 0; l < cols; l++) {
+					if (a[i][j] == a[k][l]) {
+						count++;
+					}
+				}
+			}
+			if (count > maxCount) {
+				maxCount = count;
+				giaTri = a[i][j];
+			}
+		}
+	}
+	return giaTri;
+}
+
+//Tìm các chữ số xuất hiện nhiều nhất trong ma trận
+int TimChuSoXuatHienNhieuNhat(int a[][MAX_SIZE], int rows, int cols) {
+	int count[10] = { 0 };
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			int num = a[i][j];
+			while (num != 0) {
+				count[num % 10]++;
+				num /= 10;
+			}
+		}
+	}
+	int maxCount = 0;
+	int chuSo = 0;
+	for (int i = 0; i < 10; i++) {
+		if (count[i] > maxCount) {
+			maxCount = count[i];
+			chuSo = i;
+		}
+	}
+	return chuSo;
+}
+
 int main() {
 	int a[MAX_SIZE][MAX_SIZE];
 	int rows, cols;
@@ -211,5 +257,9 @@ int main() {
 	LietKeDongChan(a, rows, cols);
 
 	LietKeDongGiamDan(a, rows, cols);
+
+	printf("Gia tri xuat hien nhieu nhat trong ma tran la: %d\n", TimGiaTriXuatHienNhieuNhat(a, rows, cols));
+
+	printf("Chu so xuat hien nhieu nhat trong ma tran la: %d\n", TimChuSoXuatHienNhieuNhat(a, rows, cols));
 	return 0;
 }
