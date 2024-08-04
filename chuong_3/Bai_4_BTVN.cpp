@@ -17,7 +17,7 @@ int asc(const void *a, const void *b) {
 int desc(const void *a, const void *b) {
 	return (*(int *)b - *(int *)a);
 }
-
+//Sắp xếp đường chéo phụ tăng dần / giảm dần.
 void SapXepDuongCheoPhu(int a[MAX_SIZE][MAX_SIZE], int n, int tangDan) {
 	int temp[MAX_SIZE];
 	for (int i = 0; i < n; i++) {
@@ -49,6 +49,51 @@ void SapXepDong(int a[MAX_SIZE][MAX_SIZE], int n) {
 	}
 }
 
+//Sắp xếp ma trận sao cho : các cột có chỉ số lẻ thì giảm dần, còn các cột có chỉ số chẵn thì tăng dần.
+void SapXepCot(int a[MAX_SIZE][MAX_SIZE], int n) {
+	for (int j = 0; j < n; j++) {
+		int temp[MAX_SIZE];
+		for (int i = 0; i < n; i++) {
+			temp[i] = a[i][j];
+		}
+
+		if (j % 2 == 0) {
+			qsort(temp, n, sizeof(int), asc);
+		}
+		else {
+			qsort(temp, n, sizeof(int), desc);
+		}
+
+		for (int i = 0; i < n; i++) {
+			a[i][j] = temp[i];
+		}
+	}
+}
+
+//Sắp xếp mảng sao cho các phần tử trên các đường chéo chính và các đường chéo song song với đường chéo chính tăng dần.
+void SapXepDuongCheoChinhVaSongSong(int a[MAX_SIZE][MAX_SIZE], int n) {
+	for (int d = -n + 1; d < n; d++) {
+		int temp[MAX_SIZE];
+		int k = 0;
+
+		for (int i = 0; i < n; i++) {
+			int j = i + d;
+			if (j >= 0 && j < n) {
+				temp[k++] = a[i][j];
+			}
+		}
+
+		qsort(temp, k, sizeof(int), asc);
+
+		k = 0;
+		for (int i = 0; i < n; i++) {
+			int j = i + d;
+			if (j >= 0 && j < n) {
+				a[i][j] = temp[k++];
+			}
+		}
+	}
+}
 //In ma trận
 void InMaTran(int a[MAX_SIZE][MAX_SIZE], int n) {
 	for (int i = 0; i < n; i++) {
@@ -104,8 +149,14 @@ int main() {
 			InMaTran(a, n);
 			break;
 		case 4:
+			SapXepCot(a, n);
+			printf("Ma tran sau khi sap xep cac cot (le giam dan, chan tang dan):\n");
+			InMaTran(a, n);
 			break;
 		case 5:
+			SapXepDuongCheoChinhVaSongSong(a, n);
+			printf("Ma tran sau khi sap xep cac duong cheo chinh va song song:\n");
+			InMaTran(a, n);
 			break;
 		case 6:
 			break;
