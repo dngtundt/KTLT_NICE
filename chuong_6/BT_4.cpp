@@ -37,7 +37,21 @@ void xuatThuoc(Thuoc t) {
     printf("Cong dung: %s\n", t.congDung);
 }
 
+void hoanDoi(Thuoc* a, Thuoc* b) {
+    Thuoc temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
+void sapXepTheoMaThuoc(Thuoc dsThuoc[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (strcmp(dsThuoc[j].maThuoc, dsThuoc[j + 1].maThuoc) > 0) {
+                hoanDoi(&dsThuoc[j], &dsThuoc[j + 1]);
+            }
+        }
+    }
+}
 
 int main() {
     int n = 0;
@@ -65,6 +79,14 @@ int main() {
             break;
         case 2:
             printf("\nDanh sach thuoc:\n");
+            for (int i = 0; i < n; i++) {
+                printf("Thong tin thuoc thu %d:\n", i + 1);
+                xuatThuoc(dsThuoc[i]);
+            }
+            break;
+        case 3:
+            sapXepTheoMaThuoc(dsThuoc, n);
+            printf("\nDanh sach thuoc sau khi sap xep theo ma thuoc:\n");
             for (int i = 0; i < n; i++) {
                 printf("Thong tin thuoc thu %d:\n", i + 1);
                 xuatThuoc(dsThuoc[i]);
