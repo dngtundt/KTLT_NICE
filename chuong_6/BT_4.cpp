@@ -53,6 +53,23 @@ void sapXepTheoMaThuoc(Thuoc dsThuoc[], int n) {
     }
 }
 
+int binarySearch(Thuoc dsThuoc[], int n, char* maThuoc) {
+    int left = 0, right = n - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (strncmp(dsThuoc[mid].maThuoc, maThuoc, 3) == 0) {
+            return mid;
+        }
+        else if (strncmp(dsThuoc[mid].maThuoc, maThuoc, 3) > 0) {
+            right = mid - 1;
+        }
+        else {
+            left = mid + 1;
+        }
+    }
+    return -1;
+}
+
 int main() {
     int n = 0;
     Thuoc dsThuoc[MAX];
@@ -92,6 +109,18 @@ int main() {
                 xuatThuoc(dsThuoc[i]);
             }
             break;
+        case 4: {
+            char maCanTim[4] = "T01";
+            int index = binarySearch(dsThuoc, n, maCanTim);
+            if (index != -1) {
+                printf("\nThong tin thuoc co ma bat dau bang \"%s\":\n", maCanTim);
+                xuatThuoc(dsThuoc[index]);
+            }
+            else {
+                printf("\nKhong tim thay thuoc co ma bat dau bang \"%s\"\n", maCanTim);
+            }
+            break;
+        }
         case 0:
             printf("Thoat chuong trinh.\n");
             break;
