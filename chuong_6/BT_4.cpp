@@ -13,6 +13,32 @@ typedef struct {
     char congDung[51];
 } Thuoc;
 
+void nhapThuoc(Thuoc* t) {
+    printf("Nhap ma thuoc (5 ky tu): ");
+    scanf("%5s", t->maThuoc);
+    printf("Nhap ten thuoc (20 ky tu): ");
+    scanf(" %20[^\n]", t->tenThuoc);
+    printf("Nhap nha san xuat (20 ky tu): ");
+    scanf(" %20[^\n]", t->nhaSanXuat);
+    printf("Nhap dang thuoc (10 ky tu): ");
+    scanf(" %10s", t->dangThuoc);
+    printf("Nhap don gia: ");
+    scanf("%f", &t->donGia);
+    printf("Nhap cong dung (50 ky tu): ");
+    scanf(" %50[^\n]", t->congDung);
+}
+
+void xuatThuoc(Thuoc t) {
+    printf("Ma thuoc: %s\n", t.maThuoc);
+    printf("Ten thuoc: %s\n", t.tenThuoc);
+    printf("Nha san xuat: %s\n", t.nhaSanXuat);
+    printf("Dang thuoc: %s\n", t.dangThuoc);
+    printf("Don gia: %.2f\n", t.donGia);
+    printf("Cong dung: %s\n", t.congDung);
+}
+
+
+
 int main() {
     int n = 0;
     Thuoc dsThuoc[MAX];
