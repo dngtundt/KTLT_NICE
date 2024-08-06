@@ -55,6 +55,21 @@ int main() {
         scanf("%d", &luaChon);
 
         switch (luaChon) {
+        case 1:
+            printf("Nhap so luong thuoc: ");
+            scanf("%d", &n);
+            for (int i = 0; i < n; i++) {
+                printf("Nhap thong tin thuoc thu %d:\n", i + 1);
+                nhapThuoc(&dsThuoc[i]);
+            }
+            break;
+        case 2:
+            printf("\nDanh sach thuoc:\n");
+            for (int i = 0; i < n; i++) {
+                printf("Thong tin thuoc thu %d:\n", i + 1);
+                xuatThuoc(dsThuoc[i]);
+            }
+            break;
         case 0:
             printf("Thoat chuong trinh.\n");
             break;
